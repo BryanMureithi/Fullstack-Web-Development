@@ -1,4 +1,5 @@
 function Header(props) {
+  console.log(props);
   return (
     <>
       <h1>{props.course}</h1>
@@ -7,22 +8,31 @@ function Header(props) {
 }
 
 function Content() {
-  const part1 = "Fundamentals of React";
-  const exercises1 = 10;
-  const part2 = "Using props to pass data";
-  const exercises2 = 7;
-  const part3 = "State of a component";
-  const exercises3 = 14;
+  const parts = [
+    {
+      name: "Fundamentals",
+      exercises: 10,
+    },
+    {
+      name: "Using Props to Pass Data",
+      exercises: 7,
+    },
+    {
+      name: " State of a Component ",
+      exercises: 14,
+    },
+  ];
   return (
     <>
-      <Part part={part1} exercise={exercises1} />
-      <Part part={part2} exercise={exercises2} />
-      <Part part={part3} exercise={exercises3} />
+      <Part part={parts[0].name} exercise={parts[0].exercises} />
+      <Part part={parts[1].name} exercise={parts[1].exercises} />
+      <Part part={parts[2].name} exercise={parts[2].exercises} />
     </>
   );
 }
 
 function Total(props) {
+  console.log(props);
   return (
     <>
       <p>
@@ -43,23 +53,34 @@ function Part(props) {
   );
 }
 
-function App() {
+const App = () => {
   const course = "Half Stack application development";
-  const exercises1 = 10;
-  const exercises2 = 7;
-  const exercises3 = 14;
+  const parts = [
+    {
+      name: "Fundamentals",
+      exercises: 10,
+    },
+    {
+      name: "Using Props to Pass Data",
+      exercises: 7,
+    },
+    {
+      name: " State of a Component ",
+      exercises: 14,
+    },
+  ];
 
   return (
     <>
       <Header course={course} />
       <Content />
       <Total
-        exercises1={exercises1}
-        exercises2={exercises2}
-        exercises3={exercises3}
+        exercises1={parts[0].exercises}
+        exercises2={parts[1].exercises}
+        exercises3={parts[2].exercises}
       />
     </>
   );
-}
+};
 
 export default App;
