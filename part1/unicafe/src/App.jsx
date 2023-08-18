@@ -1,5 +1,14 @@
 import { useState } from "react";
 
+const StatisticLine = ({ text, value }) => {
+  return (
+    <>
+      <td>{text}</td>
+      <td>{value}</td>
+    </>
+  );
+};
+
 const Statistics = ({ good, bad, neutral, total, average, feedback }) => {
   if (total === 0) {
     return (
@@ -10,14 +19,28 @@ const Statistics = ({ good, bad, neutral, total, average, feedback }) => {
   }
   return (
     <>
-      <div>
-        <p>Good {good}</p>
-        <p>Neutral {neutral}</p>
-        <p>Bad {bad}</p>
-        <p>Total {total}</p>
-        <p>Average {average}</p>
-        <p>Positive Feedback {feedback}</p>
-      </div>
+      <table>
+        <tbody>
+          <tr>
+            <StatisticLine text="Good" value={good} />
+          </tr>
+          <tr>
+            <StatisticLine text="Neutral" value={neutral} />
+          </tr>
+          <tr>
+            <StatisticLine text="Bad" value={bad} />
+          </tr>
+          <tr>
+            <StatisticLine text="Total" value={total} />
+          </tr>
+          <tr>
+            <StatisticLine text="Average" value={average} />
+          </tr>
+          <tr>
+            <StatisticLine text="Positive Feedback" value={feedback} />
+          </tr>
+        </tbody>
+      </table>
     </>
   );
 };
@@ -37,26 +60,28 @@ function App() {
   const handleGoodClick = () => {
     const newGood = good + 1;
     setGood(newGood);
-    setTotal(newGood + neutral + bad);
-    setAverage(total / 3);
-    setFeedback((newGood / total) * 100);
+    const newTotal = newGood + neutral + bad;
+    setTotal(newTotal);
+    setAverage(newTotal / 3);
+    setFeedback((newGood / newTotal) * 100);
   };
 
   const handleNeutralClick = () => {
     const newNeutral = neutral + 1;
     setNeutral(newNeutral);
-    console.log(newNeutral);
-    setTotal(good + newNeutral + bad);
-    setAverage(total / 3);
-    setFeedback((good / total) * 100);
+    const newTotal = good + newNeutral + bad;
+    setTotal(newTotal);
+    setAverage(newTotal / 3);
+    setFeedback((newNeutral / newTotal) * 100);
   };
 
   const handleBadClick = () => {
     const newBad = bad + 1;
     setBad(newBad);
-    setTotal(good + neutral + newBad);
-    setAverage(total / 3);
-    setFeedback((good / total) * 100);
+    const newTotal = good + neutral + newBad;
+    setTotal(newTotal);
+    setAverage(newTotal / 3);
+    setFeedback((newBad / newTotal) * 100);
   };
 
   return (
